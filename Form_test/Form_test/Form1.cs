@@ -31,23 +31,41 @@ namespace Form_test
             {
                 for (int j = 0; j < 3; j++)
                 {
-                   //インスタンスの生成
-                  TestButton testButton =
-                  new TestButton(new Point(BUTTON_SIZE_X  * i, BUTTON_SIZE_Y * j),
-                  new Size(BUTTON_SIZE_X, BUTTON_SIZE_Y)," "); 
+                    //インスタンスの生成
+                    TestButton testButton =
+                    new TestButton(
+                      this,
+                      i,
+                      j,
+                      new Point(BUTTON_SIZE_X * i, BUTTON_SIZE_Y * j),
+                      new Size(BUTTON_SIZE_X, BUTTON_SIZE_Y), "");
 
-                //配列にボタンの参照 
-                 _buttonArray[j, i] = testButton;
+                    //配列にボタンの参照 
+                    _buttonArray[j, i] = testButton;
 
-                   Controls.Add(testButton);   //コントールにボタン追加
+                    Controls.Add(testButton);   //コントールにボタン追加
                 }
             }
 
-            _buttonArray[0, 0]. SetEnable(true);
-            _buttonArray[1, 0].SetEnable(true);
-            _buttonArray[2, 0].SetEnable(true);
+            Random rnd = new Random();
 
+            int a = rnd.Next(0, 3);
 
+            int b = rnd.Next(0, 3);
+
+            _buttonArray[a, b].SetEnable(true);
+           
+        }
+
+        public object Next { get; }
+
+        public TestButton GetTextButton(int x, int y)
+        {  
+            //配列外参照対策
+            if (x < 0 || x >= BOARD_SIZE_X) return null;
+            if (y < 0 || y >= BOARD_SIZE_Y) return null;
+
+            return _buttonArray[y, x];
         }
 
         private void ClickEvent(object sender, EventArgs e)
