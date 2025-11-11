@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -46,16 +47,22 @@ namespace Form_test
                     Controls.Add(testButton);   //コントールにボタン追加
                 }
             }
-
             Random rnd = new Random();
+            for (int x = 0; x<7; x++)
+            {
 
-            int a = rnd.Next(0, 3);
+                int a = rnd.Next(0, 3);
 
-            int b = rnd.Next(0, 3);
+                int b = rnd.Next(0, 3);
 
-            _buttonArray[a, b].SetEnable(true);
-           
+                _buttonArray[a, b].SetEnable(true);
+            }
+            
+       
+
         }
+
+        
 
         public object Next { get; }
 
@@ -68,10 +75,17 @@ namespace Form_test
             return _buttonArray[y, x];
         }
 
+        
+       
+
+
         private void ClickEvent(object sender, EventArgs e)
         {
             MessageBox.Show("こんにちは");
         }
+
+       
+
 
 
     }
